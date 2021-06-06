@@ -27,7 +27,7 @@ export class ImagesService {
 
     constructor(private http: HttpClient) {}
 
-    getImage(id: string | null): Observable<MedicalImage> {
+    getImage(id: string): Observable<MedicalImage> {
         const image = this.images.find((x) => x.id === id);
         if (image !== undefined) {
             return of(image);
@@ -36,9 +36,8 @@ export class ImagesService {
             .get<ImageResponse>(this.medicalImgUrl + 'image/' + id)
             .pipe(
                 map((imageResponse: ImageResponse) => {
-                    const imageString: string | null = decompressImage(
-                        imageResponse
-                    );
+                    console.log('getImageResponse');
+                    const imageString: string = decompressImage(imageResponse);
                     this.images.push({ id, imageString });
                     return { id, imageString };
                 })
@@ -118,13 +117,12 @@ export class ImagesService {
 
     // tslint:disable-next-line:typedef
     getImageThumbName(id: string) {
-        console.log(this.imageThumbs);
         const imageThumb = this.imageThumbs.get(id);
-        console.log(imageThumb);
 
         if (imageThumb !== undefined) {
             return of(imageThumb);
         }
+
         return this.http.get(this.medicalImgUrl + `images/['${id}']`).pipe(
             map((response) => {
                 this.imageThumbs.set(

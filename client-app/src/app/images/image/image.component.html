@@ -2,9 +2,18 @@
     <div class="image-toolbar">
         <div class="image-toolbar__meta">
             <ul class="image-toolbar__list">
-                <li class="image-toolbar__name">Pasient: {{patient.firstName}} {{patient.lastName}}</li>
-                <li class="image-toolbar__date">Fødselsdato: {{ patient.dateOfBirth | date }}</li>
-                <li class="image-toolbar__">Kjønn: {{patient.gender}}</li>
+                <li class="image-toolbar__name">
+                    Pasient:
+                    {{patient ? patient.firstName : '&nbsp;'}} {{patient ? patient.lastName : '&nbsp;'}}
+                </li>
+                <li class="image-toolbar__date">
+                    Fødselsdato:
+                    {{ patient ? (patient.dateOfBirth | date) : '&nbsp;'}}
+                </li>
+                <li class="image-toolbar__">
+                    Kjønn:
+                    {{patient ? patient.gender : '&nbsp;'}}
+                </li>
             </ul>
         </div>
         <!-- /.image-toolbar__meta -->
@@ -51,7 +60,7 @@
             <img #imageElement
                  style="{{ styleWidth() }}"
                  src="{{ medicalImage ? medicalImage.imageString : '/assets/img/black.png' }}"
-                 alt="{{patient.lastName}}">
+                 alt="{{patient ? patient.lastName : '&nbsp;'}}">
             <div #bbox></div>
         </div>
     </div>

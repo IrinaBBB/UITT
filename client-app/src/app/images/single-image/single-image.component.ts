@@ -19,12 +19,6 @@ export class SingleImageComponent implements OnInit {
         this.getImageThumb();
     }
 
-    getImage(): void {
-        this.imageService.getImage(this.imageUrl).subscribe((image) => {
-            this.medicalImage = image;
-        });
-    }
-
     getImageThumb(): void {
         this.imageService
             .getImageThumbName(this.imageUrl)

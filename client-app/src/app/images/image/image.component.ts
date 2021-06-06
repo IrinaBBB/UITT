@@ -25,7 +25,7 @@ export class ImageComponent implements OnInit {
     // @ts-ignore
     medicalImage: MedicalImage | undefined;
     containerWidth = 100;
-    patient: Patient | undefined;
+    patient: Patient;
     bsModalRef: BsModalRef;
     coefficient = 0;
 
@@ -57,24 +57,25 @@ export class ImageComponent implements OnInit {
     }
 
     getImageAndPatient(): void {
+        console.log('getImageAndPatient');
         const paramId = this.route.snapshot.paramMap.get('id');
-        this.paramService.setParamId(paramId);
+        // this.paramService.setParamId(paramId);
 
         const paramPatientId = this.route.snapshot.paramMap.get('patientId');
-        this.paramService.setParamPatientId(paramPatientId);
+        // this.paramService.setParamPatientId(paramPatientId);
 
         // @ts-ignore
         const paramPatientIdNum: number = +paramPatientId;
-
-        this.imageService.getImage(paramId).subscribe((image) => {
-            this.medicalImage = image;
-        });
 
         this.patientService
             .getPatient(paramPatientIdNum)
             .subscribe((patient) => {
                 this.patient = patient;
             });
+
+        this.imageService.getImage(paramId).subscribe((image) => {
+            this.medicalImage = image;
+        });
     }
 
     styleWidth(): string {
