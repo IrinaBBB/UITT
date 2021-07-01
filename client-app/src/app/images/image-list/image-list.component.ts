@@ -24,7 +24,7 @@ export class ImageListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.loadImageMeta();
+        this.searchService.resetSearch();
         this.searchService.search.subscribe((result) => {
             this.imageParams.search = result;
             this.loadImageMeta();

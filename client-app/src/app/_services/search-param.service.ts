@@ -13,4 +13,8 @@ export class SearchParamService {
     changeSearch(searchString: string): void {
         this.searchSource.next(searchString);
     }
+
+    resetSearch(): void {
+        this.searchSource.next(null);
+    }
 }

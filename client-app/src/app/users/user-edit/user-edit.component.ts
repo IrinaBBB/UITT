@@ -65,6 +65,7 @@ export class UserEditComponent implements OnInit {
 
     updateUser(): void {
         this.userService.updateUser(this.user).subscribe(() => {
+            console.log(this.user);
             this.toastr.success('Brukerinfo ble oppdatert');
             this.editForm?.reset(this.user);
         });

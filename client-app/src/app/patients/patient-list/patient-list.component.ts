@@ -23,7 +23,7 @@ export class PatientListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.loadPatients();
+        this.searchService.resetSearch();
         this.searchService.search.subscribe((result) => {
             this.patientParams.search = result;
             this.loadPatients();

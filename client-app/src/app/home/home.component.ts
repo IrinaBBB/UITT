@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.loadMembers();
+        this.searchService.resetSearch();
         this.searchService.search.subscribe((result) => {
             this.search = result;
             this.loadMembers();
